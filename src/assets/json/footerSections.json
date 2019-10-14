@@ -1,0 +1,24 @@
+{
+  "sections": [
+    {
+      "title": "Section 1",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "title": "Section 2",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "title": "Section 3",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "title": "Section 4",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "title": "Section 5",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }
+  ]
+}

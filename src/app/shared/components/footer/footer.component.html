@@ -1,0 +1,12 @@
+<div *ngIf="sections.length > 0" class="sections-container py-5">
+
+  <div *ngFor="let section of sections" class="section ml-4 mr-4">
+
+    <h6>{{section.title}}</h6>
+
+    <p>{{section.content}}</p>
+
+  </div>
+
+</div>
+

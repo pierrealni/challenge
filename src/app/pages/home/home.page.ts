@@ -15,45 +15,24 @@ export class HomePage implements OnInit, OnDestroy {
   @ViewChild('in') in: ElementRef;
   @ViewChild('out') out: ElementRef;
 
-  public conversionData: any = {};
-  public loading: boolean = false;
+  public conversionData: any = null;
+  public loading: boolean = null;
   public conversionPoll: any = null;
-  public intervalPoll: number = 1000*60*10;
+  public intervalPoll: number = 1000 * 60 * 10;
   public toCurrency: string = 'USD';
 
   constructor(private api: ApiService) {
   }
 
   ngOnInit() {
-    this.api.getConversionData().subscribe((data: any) => {
-      this.conversionData = data.rates
-    });
-  }
-
-  onCalculate(event) {
-
-    if(!this.in.nativeElement.value){
-      this.out.nativeElement.value = '';
-      return;
-    }
-    this.loading = true;
-
     this.conversionPoll = timer(0, this.intervalPoll).pipe(
       switchMap(() => this.api.getConversionData()))
       .subscribe(
         (data: any) => {
-          if(!this.in.nativeElement.value){
-            this.out.nativeElement.value = '';
-            return;
-          }
-          this.loading = true;
-          const inputValue: number = Number.parseFloat(this.in.nativeElement.value);
           this.conversionData = data.rates;
-          const result: number = inputValue * Number.parseFloat(this.conversionData[this.toCurrency]);
-          const outputValue = result.toFixed(4);
-          this.out.nativeElement.value = outputValue;
-          this.loading = false;
-
+          if (this.loading !== null) {
+            this.onCalculate();
+          }
           console.log(this.conversionData);
         },
         (error: any) => {
@@ -62,9 +41,31 @@ export class HomePage implements OnInit, OnDestroy {
       );
   }
 
+  onCalculate() {
+
+    if (!this.in.nativeElement.value || !this.conversionData) {
+      this.out.nativeElement.value = '';
+      return;
+    }
+
+    this.loading = true;
+
+    const inputValue: number = Number.parseFloat(this.in.nativeElement.value);
+    const conversion: number = Number.parseFloat(this.conversionData[this.toCurrency]);
+
+    const result: number = inputValue * conversion;
+    const outputValue: number = Number.parseFloat(result.toFixed(4));
+
+    this.out.nativeElement.value = outputValue;
+
+    this.loading = false;
+
+  }
+
   ngOnDestroy(): void {
     if (this.conversionPoll) {
       this.conversionPoll.unsubscribe();
     }
   }
 }
+

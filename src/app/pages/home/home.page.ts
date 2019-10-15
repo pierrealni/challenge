@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
-
+import { Conversion } from '../../shared/models/conv';
 
 import { timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -28,7 +28,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.conversionPoll = timer(0, this.intervalPoll).pipe(
       switchMap(() => this.api.getConversionData()))
       .subscribe(
-        (data: any) => {
+        (data: Conversion) => {
           this.conversionData = data.rates;
           if (this.loading !== null) {
             this.onCalculate();
@@ -36,7 +36,7 @@ export class HomePage implements OnInit, OnDestroy {
           console.log(this.conversionData);
         },
         (error: any) => {
-          console.log(error)
+          console.log(error);
         }
       );
   }

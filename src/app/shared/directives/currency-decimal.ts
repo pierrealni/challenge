@@ -8,7 +8,7 @@ export class CurrencyDecimalDirective {
 
   private regex = new RegExp(/^[0-9]+(\.[0-9]{0,4}){0,1}$/g);
 
-  private specialKeys = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight'];
+  private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight'];
 
   constructor(private el: ElementRef) {
   }

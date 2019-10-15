@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../shared/services/api.service';
+import { Section } from '../../../shared/models/section';
 
 @Component({
   selector: 'app-footer',
@@ -8,14 +9,14 @@ import { ApiService } from '../../../shared/services/api.service';
 })
 export class FooterComponent implements OnInit {
 
-  public sections: any = [];
+  public sections: Array<Section> = [];
 
   constructor(private api: ApiService) {
   }
 
   ngOnInit() {
-    this.api.getFooterSections().subscribe((data: any) => {
-      this.sections = data.sections
+    this.api.getFooterSections().subscribe((data: { sections: Array<Section> }) => {
+      this.sections = data.sections;
     });
   }
 

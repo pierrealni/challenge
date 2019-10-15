@@ -8,14 +8,14 @@ import { ApiService } from '../../shared/services/api.service';
 })
 export class AboutPage implements OnInit {
 
-  public stack = [];
+  public stack: Array<string> = [];
 
   constructor(private api: ApiService) {
   }
 
   ngOnInit() {
-    this.api.getProjectStack().subscribe((data: any) => {
-      this.stack = data.stack
+    this.api.getProjectStack().subscribe((data: { stack: Array<string> }) => {
+      this.stack = data.stack;
     });
   }
 

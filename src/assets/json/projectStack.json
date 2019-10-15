@@ -1,9 +1,10 @@
 {
   "stack": [
-    "Angular 2",
+    "Angular 7",
     "Webpack",
     "Bootstrap 4",
     "RxJs",
+    "Karma",
     "TypeScript"
   ]
 }

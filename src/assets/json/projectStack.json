@@ -5,6 +5,8 @@
     "Bootstrap 4",
     "RxJs",
     "Karma",
-    "TypeScript"
+    "TypeScript",
+    "Sass",
+    "HTML5"
   ]
 }

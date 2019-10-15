@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
 import { Conversion } from '../../shared/models/conv';
 
@@ -12,8 +12,8 @@ import { switchMap } from 'rxjs/operators';
 })
 export class HomePage implements OnInit, OnDestroy {
 
-  @ViewChild('in') in: ElementRef;
-  @ViewChild('out') out: ElementRef;
+  public in: any;
+  public out: any;
 
   public conversionData: any = null;
   public loading: boolean = null;
@@ -24,7 +24,7 @@ export class HomePage implements OnInit, OnDestroy {
   constructor(private api: ApiService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.conversionPoll = timer(0, this.intervalPoll).pipe(
       switchMap(() => this.api.getConversionData()))
       .subscribe(
@@ -41,22 +41,22 @@ export class HomePage implements OnInit, OnDestroy {
       );
   }
 
-  onCalculate() {
+  onCalculate(): any {
 
-    if (!this.in.nativeElement.value || !this.conversionData) {
-      this.out.nativeElement.value = '';
+    if (!this.in || !this.conversionData) {
+      this.out = '';
       return;
     }
 
     this.loading = true;
 
-    const inputValue: number = Number.parseFloat(this.in.nativeElement.value);
+    const inputValue: number = Number.parseFloat(this.in);
     const conversion: number = Number.parseFloat(this.conversionData[this.toCurrency]);
 
     const result: number = inputValue * conversion;
     const outputValue: number = Number.parseFloat(result.toFixed(4));
 
-    this.out.nativeElement.value = outputValue;
+    this.out = outputValue;
 
     this.loading = false;
 

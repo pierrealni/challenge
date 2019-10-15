@@ -12,7 +12,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text">€</span>
       </div>
-      <input #in currencyDecimal type="text" class="form-control">
+      <input [(ngModel)]="in" currencyDecimal type="text" class="form-control">
     </div>
 
 
@@ -20,7 +20,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text">$</span>
       </div>
-      <input #out type="number" class="form-control" disabled>
+      <input [ngModel]="out" type="text" class="form-control" disabled>
     </div>
 
   </div>
